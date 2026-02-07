@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Linux 高负载开发环境搭建 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="Linux 高负载开发环境搭建内核编译 · ROS2 · NVIDIA 显卡 · 笔记本风扇控制 设备背景：Lenovo Legion Y7000P (2019)系统环境：Ubuntu 22.04 + Linux 5.15 LTS使用场景：Linux 内核编译 &#x2F; ROS2  &#x2F; 高负载开发   一、当前系统状态完成系统修复与驱动安装后，系统已经达到一个**“可长期干活”的稳">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux 高负载开发环境搭建">
+<meta property="og:url" content="http://example.com/2026/02/07/Linux-%E9%AB%98%E8%B4%9F%E8%BD%BD%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E5%AE%9E%E6%88%98%E8%AE%B0%E5%BD%95/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="Linux 高负载开发环境搭建内核编译 · ROS2 · NVIDIA 显卡 · 笔记本风扇控制 设备背景：Lenovo Legion Y7000P (2019)系统环境：Ubuntu 22.04 + Linux 5.15 LTS使用场景：Linux 内核编译 &#x2F; ROS2  &#x2F; 高负载开发   一、当前系统状态完成系统修复与驱动安装后，系统已经达到一个**“可长期干活”的稳">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-02-07T12:57:17.000Z">
+<meta property="article:modified_time" content="2026-02-07T13:18:11.691Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fork-awesome@1.2.0/css/fork-awesome.min.css">
+
+<meta name="generator" content="Hexo 8.1.1"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"><span class="fa fa-bars"></span></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+        
+          <a class="nav-icon" href="/atom.xml" title="RSS Feed"><span class="fa fa-rss"></span></a>
+        
+        <a class="nav-icon nav-search-btn" title="Search"><span class="fa fa-search"></span></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Linux-高负载开发环境实战记录" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2026/02/07/Linux-%E9%AB%98%E8%B4%9F%E8%BD%BD%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E5%AE%9E%E6%88%98%E8%AE%B0%E5%BD%95/" class="article-date">
+  <time class="dt-published" datetime="2026-02-07T12:57:17.000Z" itemprop="datePublished">2026-02-07</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Linux 高负载开发环境搭建
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <hr>
+<h1 id="Linux-高负载开发环境搭建"><a href="#Linux-高负载开发环境搭建" class="headerlink" title="Linux 高负载开发环境搭建"></a>Linux 高负载开发环境搭建</h1><h2 id="内核编译-·-ROS2-·-NVIDIA-显卡-·-笔记本风扇控制"><a href="#内核编译-·-ROS2-·-NVIDIA-显卡-·-笔记本风扇控制" class="headerlink" title="内核编译 · ROS2 · NVIDIA 显卡 · 笔记本风扇控制"></a>内核编译 · ROS2 · NVIDIA 显卡 · 笔记本风扇控制</h2><blockquote>
+<p>设备背景：Lenovo Legion Y7000P (2019)<br>系统环境：Ubuntu 22.04 + Linux 5.15 LTS<br>使用场景：Linux 内核编译 &#x2F; ROS2  &#x2F; 高负载开发</p>
+</blockquote>
+<hr>
+<h2 id="一、当前系统状态"><a href="#一、当前系统状态" class="headerlink" title="一、当前系统状态"></a>一、当前系统状态</h2><p>完成系统修复与驱动安装后，系统已经达到一个**“可长期干活”的稳定状态**：</p>
+<ul>
+<li>Linux 内核：5.15 LTS（稳定、兼容性最好）</li>
+<li>NVIDIA 驱动已正确安装（<code>nvidia-smi</code> 正常）</li>
+<li>网络、输入设备全部恢复</li>
+<li>准备进入 <strong>高负载开发阶段</strong></li>
+</ul>
+<p>接下来的问题</p>
+<blockquote>
+<p><strong>如何在高负载下，跑得稳、跑得快、不降频、不炸机</strong></p>
+</blockquote>
+<hr>
+<h2 id="二、Linux-内核编译环境准备"><a href="#二、Linux-内核编译环境准备" class="headerlink" title="二、Linux 内核编译环境准备"></a>二、Linux 内核编译环境准备</h2><h3 id="必备依赖一次性装齐"><a href="#必备依赖一次性装齐" class="headerlink" title="必备依赖一次性装齐"></a>必备依赖一次性装齐</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt update</span><br><span class="line"><span class="built_in">sudo</span> apt install build-essential \</span><br><span class="line">                 libncurses-dev \</span><br><span class="line">                 bison flex \</span><br><span class="line">                 libssl-dev \</span><br><span class="line">                 libelf-dev</span><br></pre></td></tr></table></figure>
+
+<h3 id="关键命令解释"><a href="#关键命令解释" class="headerlink" title="关键命令解释"></a>关键命令解释</h3><ul>
+<li><code>make menuconfig</code><br>→ 图形化配置内核功能</li>
+<li><code>make -j$(nproc)</code><br>→ 使用全部 CPU 核心并行编译（ 极高发热）</li>
+</ul>
+<h3 id="易踩坑"><a href="#易踩坑" class="headerlink" title="易踩坑"></a>易踩坑</h3><ul>
+<li>内核编译 <strong>极吃磁盘空间</strong></li>
+<li>中间文件可达 <strong>15–30GB</strong></li>
+<li>不建议在 128GB 系统盘直接编译</li>
+</ul>
+<hr>
+<h2 id="三、ROS-环境选择与安装（Ubuntu-22-04）"><a href="#三、ROS-环境选择与安装（Ubuntu-22-04）" class="headerlink" title="三、ROS 环境选择与安装（Ubuntu 22.04）"></a>三、ROS 环境选择与安装（Ubuntu 22.04）</h2><h3 id="正确选择版本"><a href="#正确选择版本" class="headerlink" title="正确选择版本"></a>正确选择版本</h3><table>
+<thead>
+<tr>
+<th>Ubuntu</th>
+<th>推荐 ROS</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>22.04</td>
+<td>ROS2 Humble</td>
+</tr>
+</tbody></table>
+<p> 不建议在 22.04 上强装 ROS1 Noetic<br>→ 依赖地狱 + ABI 冲突</p>
+<hr>
+<h3 id="FishROS-一键安装"><a href="#FishROS-一键安装" class="headerlink" title="FishROS 一键安装"></a>FishROS 一键安装</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget http://fishros.com/install -O fishros . fishros</span><br></pre></td></tr></table></figure>
+
+<p>选择：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[1] 一键安装 ROS</span><br><span class="line">→ humble</span><br></pre></td></tr></table></figure>
+
+<h3 id="ROS2-常用"><a href="#ROS2-常用" class="headerlink" title="ROS2 常用"></a>ROS2 常用</h3><ul>
+<li><code>colcon build</code>：编译工具</li>
+<li><code>rviz2</code>：三维可视化</li>
+<li><code>gazebo</code>：仿真环境</li>
+</ul>
+<hr>
+<h2 id="四、高负载核心问题：散热与风扇控制"><a href="#四、高负载核心问题：散热与风扇控制" class="headerlink" title="四、高负载核心问题：散热与风扇控制"></a>四、高负载核心问题：散热与风扇控制</h2><h3 id="Psensor"><a href="#Psensor" class="headerlink" title="Psensor"></a>Psensor</h3><ul>
+<li>Psensor 温度读取器</li>
+<li><strong>风扇由 EC（嵌入式控制器）管理</strong></li>
+<li>Linux 默认无厂商开放接口</li>
+</ul>
+<blockquote>
+<p><strong>风扇不归 CPU 管，而归主板上的“小 MCU” 管</strong></p>
+</blockquote>
+<hr>
+<h2 id="五、NBFC-Linux：风扇工具"><a href="#五、NBFC-Linux：风扇工具" class="headerlink" title="五、NBFC-Linux：风扇工具"></a>五、NBFC-Linux：风扇工具</h2><h3 id="NBFC-在-Linux-vs-Windows-的区别"><a href="#NBFC-在-Linux-vs-Windows-的区别" class="headerlink" title="NBFC 在 Linux vs Windows 的区别"></a>NBFC 在 Linux vs Windows 的区别</h3><table>
+<thead>
+<tr>
+<th>系统</th>
+<th>结果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>Windows</td>
+<td>基本失效（驱动签名 + 内核隔离）</td>
+</tr>
+<tr>
+<td>Linux</td>
+<td>可直接访问 EC</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="启动-NBFC-服务（非常关键）"><a href="#启动-NBFC-服务（非常关键）" class="headerlink" title="启动 NBFC 服务（非常关键）"></a>启动 NBFC 服务（非常关键）</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> systemctl start nbfc_service</span><br><span class="line"><span class="built_in">sudo</span> systemctl <span class="built_in">enable</span> nbfc_service</span><br></pre></td></tr></table></figure>
+
+<p>验证：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nbfc status</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="选择适配-Y7000P-的配置文件"><a href="#选择适配-Y7000P-的配置文件" class="headerlink" title="选择适配 Y7000P 的配置文件"></a>选择适配 Y7000P 的配置文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nbfc config --list</span><br></pre></td></tr></table></figure>
+
+<p>推荐优先尝试：</p>
+<ul>
+<li><code>Lenovo Legion Y530</code></li>
+<li><code>Lenovo Legion Y7000</code></li>
+</ul>
+<p>应用：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> nbfc config --apply <span class="string">&quot;Lenovo Legion Y530&quot;</span></span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="高负载前的标准操作"><a href="#高负载前的标准操作" class="headerlink" title="高负载前的标准操作"></a>高负载前的标准操作</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 强制风扇满速（内核编译 / Gazebo）</span></span><br><span class="line"><span class="built_in">sudo</span> nbfc <span class="built_in">set</span> -s 100</span><br><span class="line"></span><br><span class="line"><span class="comment"># 恢复自动模式</span></span><br><span class="line"><span class="built_in">sudo</span> nbfc <span class="built_in">set</span> -a</span><br></pre></td></tr></table></figure>
+
+<p> <strong>编译结束恢复自动模式</strong></p>
+<hr>
+<h2 id="六、NBFC-编译-安装失败的真实原因总结"><a href="#六、NBFC-编译-安装失败的真实原因总结" class="headerlink" title="六、NBFC 编译 &#x2F; 安装失败的真实原因总结"></a>六、NBFC 编译 &#x2F; 安装失败的真实原因总结</h2><h3 id="make-报-“没有那个文件或目录”"><a href="#make-报-“没有那个文件或目录”" class="headerlink" title="make 报 “没有那个文件或目录”"></a>make 报 “没有那个文件或目录”</h3><p>常见原因：</p>
+<ul>
+<li>缺 <code>-dev</code> 结尾的开发包</li>
+<li>项目使用 <code>cmake</code>，却直接 <code>make</code></li>
+<li>内核头文件未安装</li>
+</ul>
+<p>补救：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt install linux-headers-$(<span class="built_in">uname</span> -r)</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="用-deb-安装后，又手动-make-的问题"><a href="#用-deb-安装后，又手动-make-的问题" class="headerlink" title="用 deb 安装后，又手动 make 的问题"></a>用 deb 安装后，又手动 make 的问题</h3><ul>
+<li><code>.deb</code> 是 <strong>成品</strong></li>
+<li><code>make</code> 是 <strong>现场加工</strong></li>
+<li>两者混用极易冲突</li>
+</ul>
+<p> <strong>要么 deb，要么源码，不要同时</strong></p>
+<hr>
+<h2 id="七、apt-安装本地-deb-报权限错误的根因"><a href="#七、apt-安装本地-deb-报权限错误的根因" class="headerlink" title="七、apt 安装本地 deb 报权限错误的根因"></a>七、apt 安装本地 deb 报权限错误的根因</h2><h3 id="错误信息"><a href="#错误信息" class="headerlink" title="错误信息"></a>错误信息</h3><figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">文件无法被用户 _apt 访问，已脱离沙盒</span><br></pre></td></tr></table></figure>
+
+<h3 id="本质原因"><a href="#本质原因" class="headerlink" title="本质原因"></a>本质原因</h3><ul>
+<li><code>apt</code> 使用低权限 <code>_apt</code> 用户</li>
+<li>桌面目录对 <code>_apt</code> 不可读</li>
+</ul>
+<hr>
+<h3 id="正确解决方式"><a href="#正确解决方式" class="headerlink" title="正确解决方式"></a>正确解决方式</h3><h4 id="方法-A："><a href="#方法-A：" class="headerlink" title="方法 A："></a>方法 A：</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chmod</span> 644 xxx.deb</span><br><span class="line"><span class="built_in">sudo</span> apt install ./xxx.deb</span><br></pre></td></tr></table></figure>
+
+<h4 id="方法-B："><a href="#方法-B：" class="headerlink" title="方法 B："></a>方法 B：</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> <span class="built_in">mv</span> xxx.deb /tmp/</span><br><span class="line"><span class="built_in">sudo</span> apt install /tmp/xxx.deb</span><br></pre></td></tr></table></figure>
+
+<h4 id="方法-C："><a href="#方法-C：" class="headerlink" title="方法 C："></a>方法 C：</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> dpkg -i xxx.deb</span><br><span class="line"><span class="built_in">sudo</span> apt --fix-broken install</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="八、NVIDIA-显卡性能拉满（GTX-1650）"><a href="#八、NVIDIA-显卡性能拉满（GTX-1650）" class="headerlink" title="八、NVIDIA 显卡性能拉满（GTX 1650）"></a>八、NVIDIA 显卡性能拉满（GTX 1650）</h2><h3 id="切换到独显模式"><a href="#切换到独显模式" class="headerlink" title="切换到独显模式"></a>切换到独显模式</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">prime-select query</span><br><span class="line"><span class="built_in">sudo</span> prime-select nvidia</span><br></pre></td></tr></table></figure>
+
+<p>重启后生效。</p>
+<hr>
+<h3 id="NVIDIA-控制面板调优"><a href="#NVIDIA-控制面板调优" class="headerlink" title="NVIDIA 控制面板调优"></a>NVIDIA 控制面板调优</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nvidia-settings</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>PowerMizer</li>
+<li>Preferred Mode → <strong>Prefer Maximum Performance</strong></li>
+</ul>
+<hr>
+<h3 id="开启持久模式（防止反复加载）"><a href="#开启持久模式（防止反复加载）" class="headerlink" title="开启持久模式（防止反复加载）"></a>开启持久模式（防止反复加载）</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> nvidia-smi -pm 1</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="CUDA-工具链（ROS-OpenCV-PCL-必备）"><a href="#CUDA-工具链（ROS-OpenCV-PCL-必备）" class="headerlink" title="CUDA 工具链（ROS &#x2F; OpenCV &#x2F; PCL 必备）"></a>CUDA 工具链（ROS &#x2F; OpenCV &#x2F; PCL 必备）</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">sudo</span> apt install nvidia-cuda-toolkit</span><br><span class="line">nvcc -V</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="九、底层知识点"><a href="#九、底层知识点" class="headerlink" title="九、底层知识点"></a>九、底层知识点</h2><table>
+<thead>
+<tr>
+<th>概念</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>EC</td>
+<td>主板嵌入式控制器，管理风扇</td>
+</tr>
+<tr>
+<td>DKMS</td>
+<td>内核与驱动的桥梁</td>
+</tr>
+<tr>
+<td>Thermal Throttling</td>
+<td>高温自动降频</td>
+</tr>
+<tr>
+<td>Prime</td>
+<td>双显卡切换机制</td>
+</tr>
+<tr>
+<td>Persistence Mode</td>
+<td>NVIDIA 驱动常驻</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="十、高负载生存指南（非常重要）"><a href="#十、高负载生存指南（非常重要）" class="headerlink" title="十、高负载生存指南（非常重要）"></a>十、高负载生存指南（非常重要）</h2><h3 id="编译内核前"><a href="#编译内核前" class="headerlink" title="编译内核前"></a>编译内核前</h3><ul>
+<li>风扇拉满</li>
+<li><code>make -j4</code> 而不是 <code>-j8</code></li>
+<li><code>watch -n 1 sensors</code></li>
+</ul>
+<h3 id="硬件层面"><a href="#硬件层面" class="headerlink" title="硬件层面"></a>硬件层面</h3><ul>
+<li>清灰</li>
+<li>更换硅脂 &#x2F; 相变片（7950）</li>
+</ul>
+<hr>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2026/02/07/Linux-%E9%AB%98%E8%B4%9F%E8%BD%BD%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E5%AE%9E%E6%88%98%E8%AE%B0%E5%BD%95/" data-id="cuidHp4509XKihbc2lGAiBpxM" data-title="Linux 高负载开发环境搭建" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      
+      
+      
+    </footer><script src="https://giscus.app/client.js"
+        data-repo="karSGTC/karSGTC.github.io"
+        data-repo-id="R_kgDORKkxiA"
+        data-category="Announcements"
+        data-category-id="DIC_kwDORKkxiM4C1_7d"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="preferred_color_scheme"
+        data-lang="zh-CN"
+        crossorigin="anonymous"
+        async>
+</script>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2026/02/07/%E6%8B%AF%E6%95%91%E8%80%85Ubuntu%E8%87%AA%E5%8A%A8%E5%AE%89%E8%A3%85%E6%98%BE%E5%8D%A1%E9%A9%B1%E5%8A%A8%E5%90%8E%E8%A7%A6%E6%91%B8%E6%9D%BF%E4%B8%8E%E7%BD%91%E5%8D%A1%E5%A4%B1%E6%95%88%E6%8E%92%E9%94%99%E4%B8%8E%E4%BF%AE%E5%A4%8D/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">拯救者Ubuntu自动安装显卡驱动后触摸板与网卡失效排错与修复</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2026/02/">February 2026</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2026/02/07/Linux-%E9%AB%98%E8%B4%9F%E8%BD%BD%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E5%AE%9E%E6%88%98%E8%AE%B0%E5%BD%95/">Linux 高负载开发环境搭建</a>
+          </li>
+        
+          <li>
+            <a href="/2026/02/07/%E6%8B%AF%E6%95%91%E8%80%85Ubuntu%E8%87%AA%E5%8A%A8%E5%AE%89%E8%A3%85%E6%98%BE%E5%8D%A1%E9%A9%B1%E5%8A%A8%E5%90%8E%E8%A7%A6%E6%91%B8%E6%9D%BF%E4%B8%8E%E7%BD%91%E5%8D%A1%E5%A4%B1%E6%95%88%E6%8E%92%E9%94%99%E4%B8%8E%E4%BF%AE%E5%A4%8D/">拯救者Ubuntu自动安装显卡驱动后触摸板与网卡失效排错与修复</a>
+          </li>
+        
+          <li>
+            <a href="/2026/02/07/Ubuntu-22-04%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/">Ubuntu 22.04嵌入式开发环境搭建踩坑记录</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2026 John Doe<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.6.4.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
