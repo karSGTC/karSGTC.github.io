@@ -4,13 +4,17 @@
   <meta charset="utf-8">
   
   
-  <title>Hexo</title>
+  <title>Ubuntu 22.04嵌入式开发环境搭建踩坑记录 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/index.html">
+  <meta name="description" content="设备：联想拯救者 Y7000P 2019  硬盘结构：   1TB NVMe：Windows 10  128GB SATA：Ubuntu 22.04（独立安装）  定位：Linux 嵌入式 &#x2F; 交叉编译 &#x2F; SoC BSP &#x2F; Yocto 真实踩坑记录 + 原理复盘 Win + Linux 物理双盘  一、选择 Ubuntu 22.04 而不是 24.04 2026">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Ubuntu 22.04嵌入式开发环境搭建踩坑记录">
+<meta property="og:url" content="http://example.com/Ubuntu-22-04%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="设备：联想拯救者 Y7000P 2019  硬盘结构：   1TB NVMe：Windows 10  128GB SATA：Ubuntu 22.04（独立安装）  定位：Linux 嵌入式 &#x2F; 交叉编译 &#x2F; SoC BSP &#x2F; Yocto 真实踩坑记录 + 原理复盘 Win + Linux 物理双盘  一、选择 Ubuntu 22.04 而不是 24.04 2026">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2026-02-07T11:52:06.000Z">
+<meta property="article:modified_time" content="2026-02-07T12:07:07.861Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
   
@@ -69,11 +73,9 @@
 </header>
 
       <div class="outer">
-        <section id="main">
-  
-    <article id="post-Ubuntu-22-04嵌入式开发环境搭建踩坑记录" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+        <section id="main"><article id="page-" class="h-entry article article-type-page" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
   <div class="article-meta">
-    <a href="/2026/02/07/Ubuntu-22-04%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/" class="article-date">
+    <a href="/Ubuntu-22-04%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95.html" class="article-date">
   <time class="dt-published" datetime="2026-02-07T11:52:06.000Z" itemprop="datePublished">2026-02-07</time>
 </a>
     
@@ -84,8 +86,8 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2026/02/07/Ubuntu-22-04%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/">Ubuntu 22.04嵌入式开发环境搭建踩坑记录</a>
+    <h1 class="p-name article-title" itemprop="headline name">
+      Ubuntu 22.04嵌入式开发环境搭建踩坑记录
     </h1>
   
 
@@ -93,31 +95,18 @@
     
     <div class="e-content article-entry" itemprop="articleBody">
       
-        <blockquote>
-<p>设备：联想拯救者 Y7000P 2019</p>
-<p>硬盘结构：</p>
-<ul>
-<li>1TB NVMe：Windows 10</li>
-<li>128GB SATA：Ubuntu 22.04（独立安装）</li>
-</ul>
-<p>定位：Linux 嵌入式 &#x2F; 交叉编译 &#x2F; SoC BSP &#x2F; Yocto</p>
-</blockquote>
-<p>这篇文章不是教程，而是一份<strong>真实踩坑记录 + 原理复盘</strong>。如果你是嵌入式新手，或者第一次在笔记本上做 <strong>Win + Linux 物理双盘</strong>，这篇内容能帮你少浪费几天生命。</p>
+        <p> 设备：联想拯救者 Y7000P 2019</p>
+<p> 硬盘结构：</p>
+<p>  1TB NVMe：Windows 10<br>  128GB SATA：Ubuntu 22.04（独立安装）</p>
+<p> 定位：Linux 嵌入式 &#x2F; 交叉编译 &#x2F; SoC BSP &#x2F; Yocto</p>
+<p>真实踩坑记录 + 原理复盘<br> Win + Linux 物理双盘</p>
 <hr>
-<h2 id="一、为什么我最终选择-Ubuntu-22-04-而不是-24-04"><a href="#一、为什么我最终选择-Ubuntu-22-04-而不是-24-04" class="headerlink" title="一、为什么我最终选择 Ubuntu 22.04 而不是 24.04"></a>一、为什么我最终选择 Ubuntu 22.04 而不是 24.04</h2><blockquote>
-<p><strong>2026 时间点，嵌入式工程师默认首选 Ubuntu 22.04</strong>，除非你是全新项目 + 全新硬件。</p>
-</blockquote>
+<h2 id="一、选择-Ubuntu-22-04-而不是-24-04"><a href="#一、选择-Ubuntu-22-04-而不是-24-04" class="headerlink" title="一、选择 Ubuntu 22.04 而不是 24.04"></a>一、选择 Ubuntu 22.04 而不是 24.04</h2><p> 2026 时间点，嵌入式工程师默认首选 Ubuntu 22.04，除非全新项目 + 全新硬件。</p>
 <h3 id="1-工具链与-SDK-现实问题"><a href="#1-工具链与-SDK-现实问题" class="headerlink" title="1. 工具链与 SDK 现实问题"></a>1. 工具链与 SDK 现实问题</h3><p>大量芯片原厂 SDK（NXP &#x2F; TI &#x2F; Rockchip &#x2F; 海思 &#x2F; 全志）：</p>
-<ul>
-<li>编译于 <strong>glibc 2.31 ~ 2.35</strong></li>
-<li>假设宿主机是 <strong>Ubuntu 20.04 &#x2F; 22.04</strong></li>
-</ul>
+<p> 编译于 glibc 2.31 ~ 2.35<br> 假设宿主机是 Ubuntu 20.04 &#x2F; 22.04</p>
 <p>Ubuntu 24.04 使用 glibc 2.39，典型问题：</p>
-<ul>
-<li><code>GLIBC_2.34 not found</code></li>
-<li>老交叉编译器直接无法运行</li>
-</ul>
-<p><strong>22.04 工业兼容性最佳”。</strong></p>
+<p> <code>GLIBC_2.34 not found</code><br> 老交叉编译器直接无法运行</p>
+<p>22.04 工业兼容性最佳”。</p>
 <h3 id="2-Yocto-BSP-支持现实"><a href="#2-Yocto-BSP-支持现实" class="headerlink" title="2. Yocto &#x2F; BSP 支持现实"></a>2. Yocto &#x2F; BSP 支持现实</h3><table>
 <thead>
 <tr>
@@ -139,71 +128,33 @@
 </tr>
 </tbody></table>
 <p>结论：</p>
-<blockquote>
-<p><strong>优先 22.04，再考虑 24.04。</strong></p>
-</blockquote>
+<p> 优先 22.04，再考虑 24.04。</p>
 <hr>
-<h2 id="二、硬盘规划：为什么我把-Ubuntu-装到-128GB-SATA"><a href="#二、硬盘规划：为什么我把-Ubuntu-装到-128GB-SATA" class="headerlink" title="二、硬盘规划：为什么我把 Ubuntu 装到 128GB SATA"></a>二、硬盘规划：为什么我把 Ubuntu 装到 128GB SATA</h2><h3 id="1-物理隔离的好处"><a href="#1-物理隔离的好处" class="headerlink" title="1. 物理隔离的好处"></a>1. 物理隔离的好处</h3><ul>
-<li>Windows 更新不会破坏 Linux 引导</li>
-<li>Linux 折腾炸了，不影响 Win</li>
-<li>GRUB 写坏 ≠ Windows 损坏</li>
-</ul>
+<h2 id="二、硬盘规划：为什么我把-Ubuntu-装到-128GB-SATA"><a href="#二、硬盘规划：为什么我把-Ubuntu-装到-128GB-SATA" class="headerlink" title="二、硬盘规划：为什么我把 Ubuntu 装到 128GB SATA"></a>二、硬盘规划：为什么我把 Ubuntu 装到 128GB SATA</h2><h3 id="1-物理隔离的好处"><a href="#1-物理隔离的好处" class="headerlink" title="1. 物理隔离的好处"></a>1. 物理隔离的好处</h3><p> Windows 更新不会破坏 Linux 引导<br> Linux 折腾炸了，不影响 Win<br> GRUB 写坏 ≠ Windows 损坏</p>
 <hr>
-<h2 id="三、第一个大坑：联网安装-卡在“更新和其他软件”"><a href="#三、第一个大坑：联网安装-卡在“更新和其他软件”" class="headerlink" title="三、第一个大坑：联网安装 卡在“更新和其他软件”"></a>三、第一个大坑：联网安装 卡在“更新和其他软件”</h2><h3 id="表现"><a href="#表现" class="headerlink" title="表现"></a>表现</h3><ul>
-<li>卡 10 分钟</li>
-<li>卡 30 分钟</li>
-<li>看起来像死机</li>
-</ul>
+<h2 id="三、第一个大坑：联网安装-卡在“更新和其他软件”"><a href="#三、第一个大坑：联网安装-卡在“更新和其他软件”" class="headerlink" title="三、第一个大坑：联网安装 卡在“更新和其他软件”"></a>三、第一个大坑：联网安装 卡在“更新和其他软件”</h2><h3 id="表现"><a href="#表现" class="headerlink" title="表现"></a>表现</h3><p> 卡 10 分钟<br> 卡 30 分钟<br> 看起来像死机</p>
 <h3 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h3><h4 id="1-官方软件源在国外"><a href="#1-官方软件源在国外" class="headerlink" title="1. 官方软件源在国外"></a>1. 官方软件源在国外</h4><p>安装器在后台跑：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt update</span><br></pre></td></tr></table></figure>
 
 <p>默认连接 <code>archive.ubuntu.com</code>，在国内：</p>
-<ul>
-<li>DNS 慢</li>
-<li>TLS 卡</li>
-<li>直接超时</li>
-</ul>
+<p> DNS 慢<br> TLS 卡<br> 直接超时</p>
 <h4 id="2-NVIDIA-驱动自动探测"><a href="#2-NVIDIA-驱动自动探测" class="headerlink" title="2. NVIDIA 驱动自动探测"></a>2. NVIDIA 驱动自动探测</h4><p>勾选了：</p>
-<ul>
-<li>“为图形和 Wi‑Fi 硬件安装第三方软件”</li>
-</ul>
+<p> “为图形和 Wi‑Fi 硬件安装第三方软件”</p>
 <p>安装器会：</p>
-<ul>
-<li>访问 Canonical Partner 源</li>
-<li>匹配 GTX 显卡闭源驱动</li>
-</ul>
+<p> 访问 Canonical Partner 源<br> 匹配 GTX 显卡闭源驱动</p>
 <h4 id="3-中文语言包阻塞下载"><a href="#3-中文语言包阻塞下载" class="headerlink" title="3. 中文语言包阻塞下载"></a>3. 中文语言包阻塞下载</h4><p>选了中文，安装器会试图一次性下载：</p>
-<ul>
-<li>中文 locale</li>
-<li>输入法</li>
-<li>字体</li>
-</ul>
-<p><strong>阻塞式下载</strong>。</p>
-<h3 id="正确解法（推荐）"><a href="#正确解法（推荐）" class="headerlink" title="正确解法（推荐）"></a>正确解法（推荐）</h3><blockquote>
-<p><strong>断网安装</strong></p>
-</blockquote>
-<ul>
-<li>拔网线 &#x2F; 断 Wi‑Fi</li>
-<li>重新开始安装</li>
-<li>10–15 分钟完成</li>
-</ul>
+<p> 中文 locale<br> 输入法<br> 字体</p>
+<p>阻塞式下载。</p>
+<h3 id="正确解法（推荐）"><a href="#正确解法（推荐）" class="headerlink" title="正确解法（推荐）"></a>正确解法（推荐）</h3><p> 断网安装</p>
+<p> 拔网线 &#x2F; 断 Wi‑Fi<br> 重新开始安装<br> 10–15 分钟完成</p>
 <p>联网的事情，进系统再说。</p>
 <hr>
-<h2 id="四、大坑：安装结束时报-EFI-错误"><a href="#四、大坑：安装结束时报-EFI-错误" class="headerlink" title="四、大坑：安装结束时报 EFI 错误"></a>四、大坑：安装结束时报 EFI 错误</h2><h3 id="报错核心含义"><a href="#报错核心含义" class="headerlink" title="报错核心含义"></a>报错核心含义</h3><blockquote>
-<p><code>/boot/efi 看起来不像是一个 EFI 分区</code></p>
-</blockquote>
+<h2 id="四、大坑：安装结束时报-EFI-错误"><a href="#四、大坑：安装结束时报-EFI-错误" class="headerlink" title="四、大坑：安装结束时报 EFI 错误"></a>四、大坑：安装结束时报 EFI 错误</h2><h3 id="报错核心含义"><a href="#报错核心含义" class="headerlink" title="报错核心含义"></a>报错核心含义</h3><p> <code>/boot/efi 看起来不像是一个 EFI 分区</code></p>
 <p>人话：</p>
-<blockquote>
-<p><strong>没有给 GRUB 一个合法的 UEFI 启动位置。</strong></p>
-</blockquote>
-<h3 id="EFI-分区"><a href="#EFI-分区" class="headerlink" title="EFI 分区"></a>EFI 分区</h3><ul>
-<li>文件系统：<strong>FAT32</strong></li>
-<li>类型：<strong>EFI System Partition</strong></li>
-<li>不能是 ext4</li>
-<li>不能只是挂载点叫 <code>/boot/efi</code></li>
-</ul>
+<p> 没有给 GRUB 一个合法的 UEFI 启动位置。</p>
+<h3 id="EFI-分区"><a href="#EFI-分区" class="headerlink" title="EFI 分区"></a>EFI 分区</h3><p> 文件系统：FAT32<br> 类型：EFI System Partition<br> 不能是 ext4<br> 不能只是挂载点叫 <code>/boot/efi</code></p>
 <hr>
-<h2 id="五、分区方案推荐（128GB-SATA）"><a href="#五、分区方案推荐（128GB-SATA）" class="headerlink" title="五、分区方案推荐（128GB SATA）"></a>五、分区方案推荐（128GB SATA）</h2><p>在“安装类型”选择：<strong>其他选项 (Something else)</strong></p>
+<h2 id="五、分区方案推荐（128GB-SATA）"><a href="#五、分区方案推荐（128GB-SATA）" class="headerlink" title="五、分区方案推荐（128GB SATA）"></a>五、分区方案推荐（128GB SATA）</h2><p>在“安装类型”选择：其他选项 (Something else)</p>
 <h3 id="推荐结构"><a href="#推荐结构" class="headerlink" title="推荐结构"></a>推荐结构</h3><table>
 <thead>
 <tr>
@@ -232,9 +183,7 @@
 <td>编译防爆内存</td>
 </tr>
 </tbody></table>
-<h3 id="细节"><a href="#细节" class="headerlink" title="细节"></a>细节</h3><blockquote>
-<p><strong>安装启动引导器的设备：请选择 <code>/dev/sdX</code>（整块盘）</strong></p>
-</blockquote>
+<h3 id="细节"><a href="#细节" class="headerlink" title="细节"></a>细节</h3><p> 安装启动引导器的设备：请选择 <code>/dev/sdX</code>（整块盘）</p>
 <p>❌ <code>/dev/sda1</code></p>
 <p>✅ <code>/dev/sda</code></p>
 <hr>
@@ -253,34 +202,17 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo update-grub</span><br></pre></td></tr></table></figure>
 
 <hr>
-<h2 id="八、避坑清单"><a href="#八、避坑清单" class="headerlink" title="八、避坑清单"></a>八、避坑清单</h2><ul>
-<li>❌ 不要一开始就联网安装</li>
-<li>❌ 不要自动分区</li>
-<li>❌ 不要让 GRUB 写进 Windows 盘</li>
-<li>✅ EFI 分区必须 FAT32</li>
-<li>✅ Ubuntu 22.04 仍然是嵌入式主流</li>
-<li>✅ 宿主机 ≠ 目标系统</li>
-</ul>
+<h2 id="八、避坑清单"><a href="#八、避坑清单" class="headerlink" title="八、避坑清单"></a>八、避坑清单</h2><p> ❌ 不要一开始就联网安装<br> ❌ 不要自动分区<br> ❌ 不要让 GRUB 写进 Windows 盘<br> ✅ EFI 分区必须 FAT32<br> ✅ Ubuntu 22.04 仍然是嵌入式主流<br> ✅ 宿主机 ≠ 目标系统</p>
 <hr>
-<h2 id="九、建议"><a href="#九、建议" class="headerlink" title="九、建议"></a>九、建议</h2><blockquote>
-<p>系统只是工具，不是信仰。</p>
-</blockquote>
-<ul>
-<li>宿主机可以新</li>
-<li>工具链必须稳</li>
-<li>环境要可复现</li>
-</ul>
+<h2 id="九、建议"><a href="#九、建议" class="headerlink" title="九、建议"></a>九、建议</h2><p> 系统只是工具，不是信仰。</p>
+<p> 宿主机可以新<br> 工具链必须稳<br> 环境要可复现</p>
 <p>后续整理：</p>
-<ul>
-<li>嵌入式工程师必装软件清单</li>
-<li>Docker 化交叉编译环境</li>
-<li>Yocto &#x2F; Buildroot 实战踩坑</li>
-</ul>
+<p> 嵌入式工程师必装软件清单<br> Docker 化交叉编译环境<br> Yocto &#x2F; Buildroot 实战踩坑</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2026/02/07/Ubuntu-22-04%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/" data-id="cuidPO9xkrod-FsI1K_FHiijR" data-title="Ubuntu 22.04嵌入式开发环境搭建踩坑记录" class="article-share-link"><span class="fa fa-share">Share</span></a>
+      <a data-url="http://example.com/Ubuntu-22-04%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95.html" data-id="cuidr4wNytDJ6_CrHQkYTc7Z9" data-title="Ubuntu 22.04嵌入式开发环境搭建踩坑记录" class="article-share-link"><span class="fa fa-share">Share</span></a>
       
       
       
@@ -301,11 +233,9 @@
 </script>
   </div>
   
-</article>
-
-
-
+    
   
+</article>
 
 
 </section>
