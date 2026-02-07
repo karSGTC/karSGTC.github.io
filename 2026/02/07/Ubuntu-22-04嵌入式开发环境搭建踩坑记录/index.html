@@ -14,7 +14,7 @@
 <meta property="og:description" content="设备：联想拯救者 Y7000P 2019 硬盘结构：  1TB NVMe：Windows 10 128GB SATA：Ubuntu 22.04（独立安装）  定位：Linux 嵌入式 &#x2F; 交叉编译 &#x2F; SoC BSP &#x2F; Yocto  这篇文章不是教程，而是一份真实踩坑记录 + 原理复盘。如果你是嵌入式新手，或者第一次在笔记本上做 Win + Linux 物理双盘，">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2026-02-07T11:52:06.000Z">
-<meta property="article:modified_time" content="2026-02-07T12:00:21.120Z">
+<meta property="article:modified_time" content="2026-02-07T12:44:05.603Z">
 <meta property="article:author" content="John Doe">
 <meta name="twitter:card" content="summary">
   
@@ -238,7 +238,7 @@
 <p><strong>安装启动引导器的设备：请选择 <code>/dev/sdX</code>（整块盘）</strong></p>
 </blockquote>
 <p>❌ <code>/dev/sda1</code></p>
-<p>✅ <code>/dev/sda</code></p>
+<p> <code>/dev/sda</code></p>
 <hr>
 <h2 id="六、失败（原理复盘）"><a href="#六、失败（原理复盘）" class="headerlink" title="六、失败（原理复盘）"></a>六、失败（原理复盘）</h2><ol>
 <li>EFI 分区格式错误（ext4）</li>
@@ -259,9 +259,9 @@
 <li>❌ 不要一开始就联网安装</li>
 <li>❌ 不要自动分区</li>
 <li>❌ 不要让 GRUB 写进 Windows 盘</li>
-<li>✅ EFI 分区必须 FAT32</li>
-<li>✅ Ubuntu 22.04 仍然是嵌入式主流</li>
-<li>✅ 宿主机 ≠ 目标系统</li>
+<li>EFI 分区必须 FAT32</li>
+<li>Ubuntu 22.04 仍然是嵌入式主流</li>
+<li>宿主机 ≠ 目标系统</li>
 </ul>
 <hr>
 <h2 id="九、建议"><a href="#九、建议" class="headerlink" title="九、建议"></a>九、建议</h2><blockquote>
@@ -304,6 +304,20 @@
   </div>
   
     
+<nav id="article-nav">
+  
+    <a href="/2026/02/07/%E6%8B%AF%E6%95%91%E8%80%85Ubuntu%E8%87%AA%E5%8A%A8%E5%AE%89%E8%A3%85%E6%98%BE%E5%8D%A1%E9%A9%B1%E5%8A%A8%E5%90%8E%E8%A7%A6%E6%91%B8%E6%9D%BF%E4%B8%8E%E7%BD%91%E5%8D%A1%E5%A4%B1%E6%95%88%E6%8E%92%E9%94%99%E4%B8%8E%E4%BF%AE%E5%A4%8D/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          拯救者Ubuntu自动安装显卡驱动后触摸板与网卡失效排错与修复
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
   
 </article>
 
@@ -335,6 +349,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2026/02/07/%E6%8B%AF%E6%95%91%E8%80%85Ubuntu%E8%87%AA%E5%8A%A8%E5%AE%89%E8%A3%85%E6%98%BE%E5%8D%A1%E9%A9%B1%E5%8A%A8%E5%90%8E%E8%A7%A6%E6%91%B8%E6%9D%BF%E4%B8%8E%E7%BD%91%E5%8D%A1%E5%A4%B1%E6%95%88%E6%8E%92%E9%94%99%E4%B8%8E%E4%BF%AE%E5%A4%8D/">拯救者Ubuntu自动安装显卡驱动后触摸板与网卡失效排错与修复</a>
+          </li>
         
           <li>
             <a href="/2026/02/07/Ubuntu-22-04%E5%B5%8C%E5%85%A5%E5%BC%8F%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83%E6%90%AD%E5%BB%BA%E8%B8%A9%E5%9D%91%E8%AE%B0%E5%BD%95/">Ubuntu 22.04嵌入式开发环境搭建踩坑记录</a>
